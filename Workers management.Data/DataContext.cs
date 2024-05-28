@@ -18,7 +18,7 @@ namespace Workers_management.Data
         public DbSet<UserModel> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=workwers_Managment_db");
+            optionsBuilder.UseSqlServer(this._configuration.GetConnectionString("cloudDb"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
