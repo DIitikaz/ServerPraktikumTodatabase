@@ -10,12 +10,17 @@ using Workers_management.Core.models;
 
 namespace Workers_management.Data
 {
-    public class DataContext : DbContext
+   public class DataContext : DbContext
     {
+        private readonly IConfiguration _configuration;
         public DbSet<Worker> Workers { get; set; }
         public DbSet<WorkerRole> workerRoles { get; set; }
         public DbSet<RoleName> RolesName { get; set; }
         public DbSet<UserModel> Users { get; set; }
+        public DataContext(IConfiguration configuration)
+        {
+            this._configuration = configuration;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(this._configuration.GetConnectionString("cloudDb"));
